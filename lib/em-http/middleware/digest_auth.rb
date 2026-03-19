@@ -48,7 +48,7 @@ module EventMachine
         sess = "-sess" if splitted_algorithm[1]
         raw_algorithm = splitted_algorithm[0]
         if %w(MD5 SHA1 SHA2 SHA256 SHA384 SHA512 RMD160).include? raw_algorithm
-          algorithm = eval("Digest::#{raw_algorithm}")
+          algorithm = Digest.const_get(raw_algorithm)
         else
           raise "Unknown algorithm: #{raw_algorithm}"
         end
