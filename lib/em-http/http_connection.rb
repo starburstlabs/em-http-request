@@ -68,7 +68,7 @@ module EventMachine
         return true
       end
 
-      unless OpenSSL::SSL.verify_certificate_identity(@last_seen_cert, host)
+      unless OpenSSL::SSL.verify_certificate_identity(@last_seen_cert, URI.parse(parent.uri).host)
         raise OpenSSL::SSL::SSLError.new(%(host "#{host}" does not match the server certificate))
       else
         true
